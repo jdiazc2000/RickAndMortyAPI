@@ -34,11 +34,11 @@
 
 @keyframes loading-rotation {
   0% {
-    rotate: 360deg;
+    -webkit-transform: rotate(360deg);
     width: 70%;
   }
   100% {
-    rotate: 0deg;
+    -webkit-transform: rotate(0deg);
     width: 0%;
   }
 }

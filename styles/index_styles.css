@@ -48,7 +48,7 @@
 }
 
 .loading_off{
-	display: flex;
+	display: none;
 }
 
 .loader img{
