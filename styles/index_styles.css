@@ -48,15 +48,15 @@
 }
 
 .loading_off{
-	display: none;
+	display: flex;
 }
 
 .loader img{
-	-webkit-animation: loading-rotation 1.1s infinite ease-in-out; /* Safari & Chrome */
-	-moz-animation: loading-rotation 1.1s infinite ease-in-out; /* Firefox */
-	-ms-animation: loading-rotation 1.1s infinite ease-in-out; /* Internet Explorer */
-	-o-animation: loading-rotation 1.1s infinite ease-in-out; /* Opera */
-	animation: loading-rotation 1.1s infinite ease-in-out;
+	-webkit-animation: loading-rotation 1.1s infinite linear; /* Safari & Chrome */
+	-moz-animation: loading-rotation 1.1s infinite linear; /* Firefox */
+	-ms-animation: loading-rotation 1.1s infinite linear; /* Internet Explorer */
+	-o-animation: loading-rotation 1.1s infinite linear; /* Opera */
+	animation: loading-rotation 1.1s infinite linear;
 	width: 70%;
 	max-width: 35rem;
 	display: block;
@@ -64,11 +64,11 @@
 
 @keyframes loading-rotation {
 	0% {
-		rotate: 0deg;
+		-webkit-transform: rotate(0deg);
 		width: 0%;
 	}
 	100% {
-		rotate: 360deg;
+		-webkit-transform: rotate(360deg);
 		width: 70%;
 	}
 }

@@ -23,11 +23,11 @@
 
 .loader img {
 	display: block;
-  -webkit-animation: loading-rotation 1.2s infinite ease-in-out; /* Safari & Chrome */
-  -moz-animation: loading-rotation 1.2s infinite ease-in-out; /* Firefox */
-  -ms-animation: loading-rotation 1.2s infinite ease-in-out; /* Internet Explorer */
-  -o-animation: loading-rotation 1.2s infinite ease-in-out; /* Opera */
-  animation: loading-rotation 1.2s infinite ease-in-out;
+  -webkit-animation: loading-rotation 1.2s infinite linear; /* Safari & Chrome */
+  -moz-animation: loading-rotation 1.2s infinite linear; /* Firefox */
+  -ms-animation: loading-rotation 1.2s infinite linear; /* Internet Explorer */
+  -o-animation: loading-rotation 1.2s infinite linear; /* Opera */
+  animation: loading-rotation 1.2s infinite linear;
   width: 70%;
   max-width: 35rem;
 }
