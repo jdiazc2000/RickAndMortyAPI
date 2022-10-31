@@ -12,6 +12,10 @@ body{
 	background-color: #1F2833;
 }
 
+.CharacterImage{
+	width: 12rem;
+	height: 12rem;
+}
 
 .CharStatus_red{
     width: 1rem;
