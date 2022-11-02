@@ -183,16 +183,26 @@ const MostrarData = (ApiData) => {
     StatusDiv.appendChild(CharacterStatus);
     StatusDiv.appendChild(StatusColor);
     CharacterDiv.appendChild(StatusDiv);
-    CharacterDiv.appendChild(CharacterBtn);
     GenderDiv.appendChild(CharacterGender);
     CharacterDiv.appendChild(GenderDiv);
+    CharacterDiv.appendChild(CharacterBtn);
     dataDiv.appendChild(CharacterDiv);
   });
 };
 
-/* NOW I'M TESTING THIS FUNCTION, Nevermind 😅*/
+/* Search character function 😁*/
 CharacterInput.addEventListener("keyup", () => {
-  console.log(CharacterInput.value);
+  const filter = CharacterInput.value.toLowerCase();
+  const listItems = document.querySelectorAll('.CharacterDiv')
+
+  listItems.forEach((item) => {
+    let text = item.textContent
+    if(text.toLowerCase().includes(filter.toLowerCase())){
+      item.style.display = '';
+    }else{
+      item.style.display = 'none'
+    }
+  })
 });
 
 //Depending on the id of the button, loads the character data using a fetch for search the chracter data and save it inside the local storage,
@@ -202,6 +212,7 @@ dataDiv.addEventListener("click", async (e) => {
 
   if (target != "" && target != "Datadiv") {
     LoaderPortal.classList.remove("loading_off");
+    document.body.style.overflow = 'hidden'
 
     await fetch(`https://rickandmortyapi.com/api/character/${target}`)
       .then((res) => res.json())
