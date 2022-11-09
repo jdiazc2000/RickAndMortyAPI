@@ -7,29 +7,38 @@
     <title>Rick And Morty API - Julio Díaz</title>
     <link rel="icon" type="image/x-icon" href="imgs/faviicon.jpg" />
     <link rel="stylesheet" href="styles/index_styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a555f75e92.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    
-    <form id="SearchForm">
-    <div class="Header">
-      <div class="inputbox">
-        <input type="text" id="SearchCharacter" />
-        <span class="SearchText"></span>
-        <i></i>
-      </div>
-      <button>Buscar</button>
-    </form>
-      <button id="changeLenguage_btn" type="button"></button>
-    </div>
 
     <div class="loader-div loading_off">
       <span class="loader">
         <img src="imgs/Portal.png" alt="Portal" />
       </span>
     </div>
+    
+    <div class="Header">
+      <div style="display: flex;">
+      <div class="inputbox">
+        <input type="text" id="SearchCharacter" title="Buscador"/>
+        <span class="SearchText"></span>
+        <i></i>
+      </div>
+      <button class="StyledBtn" id="SrchCharBtn"><i class="fa fa-search"></i></button>
+      </div>
+      <button class="StyledBtn" id="ResetSearchBtn"><i class="fa fa-rotate-left"></i></button>
+      <button id="changeLenguage_btn" class="StyledBtn"></button>
+    </div>
 
     <div id="Datadiv"></div>
 
+    <div id="PaginationsButtons">
+      <button id="RetuPagBtn" class="StyledBtn"><i class="fa fa-arrow-left"></i></button>
+      <button id="NextPagBtn" class="StyledBtn"><i class="fa fa-arrow-right"></i></button>
+    </div>
     <script src="scripts/index.js"></script>
   </body>
 </html>

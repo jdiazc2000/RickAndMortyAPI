@@ -1,283 +1,273 @@
-*{
-    padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Sniglet", cursive;
 }
-
-h1,p{
-	color: white;
-}
-
+/* 
 body{
-	background: #293241;
+	 background: #293241;
 }
+*/
 
-.Header{
-	border: solid 2px red;
-	display: flex;
-	margin: 1rem 0px 1rem 0px ;
-	justify-content: center;
+.Header {
+  display: flex;
+  margin: 1rem 0px 1rem 0px;
+  justify-content: center;
 }
-
 
 .inputbox {
-	position: relative;
-	width: 196px;
-
-  }
-  
-  .inputbox input {
-	position: relative;
-	width: 100%;
-	padding: 20px 10px 10px;
-	background: transparent;
-	outline: none;
-	box-shadow: none;
-	border: none;
-	color: #23242a;
-	font-size: 1em;
-	letter-spacing: 0.05em;
-	transition: 0.5s;
-	z-index: 10;
-  }
-  
-  .inputbox span {
-	position: absolute;
-	left: 0;
-	padding: 20px 10px 10px;
-	font-size: 1em;
-	color: #8f8f8f;
-	letter-spacing: 00.05em;
-	transition: 0.5s;
-	pointer-events: none;
-  }
-  
-  .inputbox input:valid ~span,
-  .inputbox input:focus ~span {
-	color: #45ff5b;
-	transform: translateX(-10px) translateY(-34px);
-	font-size: 0,75em;
-  }
-  
-  .inputbox i {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 2px;
-	background: #45ff5b;
-	border-radius: 4px;
-	transition: 0.5s;
-	pointer-events: none;
-	z-index: 9;
-  }
-  
-  .inputbox input:valid ~i,
-  .inputbox input:focus ~i {
-	height: 44px;
-  }
-
-
-
-  #changeLenguage_btn{
-	margin-left: 0.4rem;;
-	position: relative;
-	padding: 10px 20px;
-	border-radius: 7px;
-	border: 1px solid rgb(61, 106, 255);
-	font-size: 14px;
-	text-transform: uppercase;
-	font-weight: 600;
-	letter-spacing: 2px;
-	background: transparent;
-	color: #fff;
-	overflow: hidden;
-	box-shadow: 0 0 0 0 transparent;
-	-webkit-transition: all 0.2s ease-in;
-	-moz-transition: all 0.2s ease-in;
-	transition: all 0.2s ease-in;
-  }
-  
-  #changeLenguage_btn:hover {
-	background: rgb(61, 106, 255);
-	box-shadow: 0 0 30px 5px rgba(0, 142, 236, 0.815);
-	-webkit-transition: all 0.2s ease-out;
-	-moz-transition: all 0.2s ease-out;
-	transition: all 0.2s ease-out;
-  }
-  
-  #changeLenguage_btn:hover::before {
-	-webkit-animation: sh02 0.5s 0s linear;
-	-moz-animation: sh02 0.5s 0s linear;
-	animation: sh02 0.5s 0s linear;
-  }
-  
-  #changeLenguage_btn::before {
-	content: '';
-	display: block;
-	width: 0px;
-	height: 86%;
-	position: absolute;
-	top: 7%;
-	left: 0%;
-	opacity: 0;
-	background: #fff;
-	box-shadow: 0 0 50px 30px #fff;
-	-webkit-transform: skewX(-20deg);
-	-moz-transform: skewX(-20deg);
-	-ms-transform: skewX(-20deg);
-	-o-transform: skewX(-20deg);
-	transform: skewX(-20deg);
-  }
-  
-  @keyframes sh02 {
-	from {
-	  opacity: 0;
-	  left: 0%;
-	}
-  
-	50% {
-	  opacity: 1;
-	}
-  
-	to {
-	  opacity: 0;
-	  left: 100%;
-	}
-  }
-  
-  #changeLenguage_btn:active {
-	box-shadow: 0 0 0 0 transparent;
-	-webkit-transition: box-shadow 0.2s ease-in;
-	-moz-transition: box-shadow 0.2s ease-in;
-	transition: box-shadow 0.2s ease-in;
-  }
-  
-
-#Datadiv{
-	display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-	gap: 30px;
-    width: 73%;
+  position: relative;
+  width: 196px;
 }
 
-
-.CharacterImage{
-	width: 12rem;
-	height: 12rem;
+.inputbox input {
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #23242a;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
 }
 
-.CharStatus_red{
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    border: solid rgb(255, 255, 255) 1px; 
-    background-color: red;
-	margin-left: 0.3rem;
-
-	animation: statusanimation_red 2s infinite ease-in-out;
+.inputbox span {
+  position: absolute;
+  left: 0;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: #8f8f8f;
+  letter-spacing: 00.05em;
+  transition: 0.5s;
+  pointer-events: none;
 }
 
-
-@keyframes statusanimation_red{
-	50%  {box-shadow: 0px 0px 5px rgb(255, 48, 48)}
+.inputbox input:valid ~ span,
+.inputbox input:focus ~ span {
+  color: #45ff5b;
+  transform: translateX(-10px) translateY(-34px);
+  font-size: 0, 75em;
 }
 
-.CharStatus_green{
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    border: solid rgb(255, 255, 255) 1px; 
-    background-color: green;
-	margin-left: 0.3rem;
-
-	animation: statusanimation_green 2s infinite ease-in-out;
+.inputbox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #45ff5b;
+  border-radius: 4px;
+  transition: 0.5s;
+  pointer-events: none;
+  z-index: 9;
 }
 
-@keyframes statusanimation_green{
-	50%  {box-shadow: 0px 0px 5px rgb(0, 156, 0);}
+.inputbox input:valid ~ i,
+.inputbox input:focus ~ i {
+  height: 44px;
 }
 
-
-.CharStatus_grey{
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    border: solid rgb(255, 255, 255) 1px; 
-	line-height: 1rem;
-    background-color: grey;
-	margin-left: 0.3rem;
-
-	animation: statusanimation_grey 2s infinite ease-in-out;
+#Datadiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 30px;
+  width: 73%;
 }
 
-@keyframes statusanimation_grey{
-	50%  {box-shadow: 0px 0px 5px rgb(163, 163, 163);}
+.CharacterImage {
+  width: 12rem;
+  height: 12rem;
+}
+
+.CharStatus_red {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  border: solid rgb(255, 255, 255) 1px;
+  background-color: red;
+  margin-left: 0.3rem;
+
+  animation: statusanimation_red 2s infinite ease-in-out;
+}
+
+@keyframes statusanimation_red {
+  50% {
+    box-shadow: 0px 0px 5px rgb(255, 48, 48);
+  }
+}
+
+.CharStatus_green {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  border: solid rgb(255, 255, 255) 1px;
+  background-color: green;
+  margin-left: 0.3rem;
+
+  animation: statusanimation_green 2s infinite ease-in-out;
+}
+
+@keyframes statusanimation_green {
+  50% {
+    box-shadow: 0px 0px 5px rgb(0, 156, 0);
+  }
+}
+
+.CharStatus_grey {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  border: solid rgb(255, 255, 255) 1px;
+  line-height: 1rem;
+  background-color: grey;
+  margin-left: 0.3rem;
+
+  animation: statusanimation_grey 2s infinite ease-in-out;
+}
+
+@keyframes statusanimation_grey {
+  50% {
+    box-shadow: 0px 0px 5px rgb(163, 163, 163);
+  }
 }
 
 .loader-div {
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: #5cad4a7a;
-	height: 100vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	-webkit-backdrop-filter: blur(2px);
-	backdrop-filter: blur( 2px );
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #5cad4a7a;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
-.loader-div .loader{
-	margin: 0 auto;
-	display: contents;
+.loader-div .loader {
+  margin: 0 auto;
+  display: contents;
 }
 
-.loading_off{
-	display: none;
+.loading_off {
+  display: none;
 }
 
-.loader img{
-	-webkit-animation: loading-rotation 2s infinite ease-in-out; /* Safari & Chrome */
-	-moz-animation: loading-rotation 2s infinite ease-in-out; /* Firefox */
-	-ms-animation: loading-rotation 2s infinite ease-in-out; /* Internet Explorer */
-	-o-animation: loading-rotation 2s infinite ease-in-out; /* Opera */
-	animation: loading-rotation 2s infinite ease-in-out;
-	width: 70%;
-	max-width: 35rem;
+.loader img {
+  -webkit-animation: loading-rotation 2s infinite ease-in-out; /* Safari & Chrome */
+  -moz-animation: loading-rotation 2s infinite ease-in-out; /* Firefox */
+  -ms-animation: loading-rotation 2s infinite ease-in-out; /* Internet Explorer */
+  -o-animation: loading-rotation 2s infinite ease-in-out; /* Opera */
+  animation: loading-rotation 2s infinite ease-in-out;
+  width: 70%;
+  max-width: 35rem;
 }
 
 @keyframes loading-rotation {
-	0% {
-		-webkit-transform: rotate(0deg);
-		width: 0%;
-	}
-	100% {
-		-webkit-transform: rotate(360deg);
-		width: 70%;
-	}
+  0% {
+    -webkit-transform: rotate(0deg);
+    width: 0%;
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    width: 70%;
+  }
 }
 
+.CharacterDiv {
+  color: black;
+  align-content: center;
+  border: solid red 2px;
+  background-color: #f5f5f5;
+  text-align: start;
+  width: 16rem;
+  padding: 1.4rem;
+  transition: 0.5s ease;
+}
 
-.CharacterDiv{
-    align-content: center;
-	border: solid red 2px;
+.CharacterDiv:hover {
+  transform: translateY(-5px);
+  -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+}
+
+.ImgContainer{
 	text-align: center;
-	width: 16rem;
-	padding: 1.7rem;
+}
+
+.ImgContainer img {
+  border-radius: 15%;
+  text-align: center;
+}
+
+.CharacterDiv h1 {
+  font-size: 1.4rem;
+}
+.CharacterDiv p {
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  margin-bottom: 0.2rem;
+}
+
+.CharacterDiv button{
+	color: white;
+	background-color: #293241;
+	padding: 0.2rem;
+	border-radius: 0.2rem;
+	width: 100%;
+	transition: 0.3s ease;
 }
 
 
-.CharacterDiv img{
-	border-radius: 50%;
+
+.CharacterDiv button:hover{
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.CharacterDiv p{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+#PaginationsButtons {
+  border: solid green 2px;
+  text-align: center;
+}
+
+.StyledBtn {
+  border: solid 2px;
+  padding: 1rem;
+  margin: 0px 1rem 0px 1rem;
+  border-color: green;
+  border-radius: 0.5rem;
+  background-color: #293241;
+  color: white;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.DisabledBtn{
+  pointer-events: none;
+  border: solid 2px;
+  padding: 1rem;
+  margin: 0px 1rem 0px 1rem;
+  border-color: rgb(134, 134, 134);
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.StyledBtn svg {
+  width: 25px;
+  height: 25px;
 }

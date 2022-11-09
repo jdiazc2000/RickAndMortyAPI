@@ -9,8 +9,6 @@ setTimeout(() => {
   }, 1000);
 
 if(CharacterSelected != null){
-    console.log(CharacterSelected.name)
-
     MainDiv.innerHTML += `
     <img src="${CharacterSelected.image}">
     <h1>${CharacterSelected.name}</h1>
