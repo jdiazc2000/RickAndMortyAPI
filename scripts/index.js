@@ -128,7 +128,6 @@ const MostrarData = (ApiData) => {
         CharacterBtn.textContent = "Ver más";
 
         //I personally will use switch statement but doesn't work too well with two conditions :(.
-
         if(character.status === 'Alive' && character.gender === 'Male'){
           CharacterStatus.innerText = Translations_Gender.Male +  " - " + Translations_Status.Alive 
         }else if (character.status === 'Alive' && character.gender === 'Female'){
