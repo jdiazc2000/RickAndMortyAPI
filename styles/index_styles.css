@@ -73,19 +73,16 @@ body{
 }
 
 #Datadiv {
+  padding: 0.5rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
   gap: 30px;
-  width: 73%;
+  width: 97%;
 }
 
-.CharacterImage {
-  width: 12rem;
-  height: 12rem;
-}
 
 .CharStatus_red {
   width: 1rem;
@@ -184,56 +181,93 @@ body{
   }
 }
 
-.CharacterDiv {
-  color: black;
-  align-content: center;
-  border: solid red 2px;
-  background-color: #f5f5f5;
-  text-align: start;
-  width: 16rem;
-  padding: 1.4rem;
-  transition: 0.5s ease;
+.character-card{        
+  position: relative;
+  width: 19rem;
+  background: radial-gradient(#111 50%, #000 100%);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  border-radius: 1rem;
 }
 
-.CharacterDiv:hover {
-  transform: translateY(-5px);
-  -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+@media(max-width: 435px){
+  .character-card{
+    height: 100%;
+  }
+}
+
+.character-card:hover{
+  background: radial-gradient(#111 50%, #000 100%);
   box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
 }
 
-.ImgContainer{
-	text-align: center;
+.character-card img{
+  width: 100%;
+  transform: scale(1.1);
+  transition: all 0.3s ease-out; 
 }
 
-.ImgContainer img {
-  border-radius: 15%;
-  text-align: center;
+.LoadingImg {
+  animation: skeleton-loading 1s linear infinite alternate;
 }
 
-.CharacterDiv h1 {
-  font-size: 1.4rem;
-}
-.CharacterDiv p {
-  display: flex;
-  align-items: flex-start;
-  justify-content: start;
-  margin-bottom: 0.2rem;
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+ 
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+
+  }
 }
 
-.CharacterDiv button{
-	color: white;
-	background-color: #293241;
-	padding: 0.2rem;
-	border-radius: 0.2rem;
-	width: 100%;
-	transition: 0.3s ease;
+.character-card:hover img{
+  transform: scale(1.2);
+  transition: all 0.3s ease-out;
+  opacity: 0.5;
 }
 
-.CharacterDiv button:hover{
-	-webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+.character-card .CharInf{
+  color: white;
+  line-height: 2.5rem;
+  width:  100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: all 0.5s ease-out;
+  padding: 1rem;
+  overflow-wrap: break-word;
+  opacity: 0%;
+}
+
+@media(max-width: 220px){
+  .character-card .CharInf{
+    line-height: 1.5rem;
+  }
+  .character-card .CharInf h1{
+   font-size: 1rem;
+  }
+}
+
+
+.character-card .CharInf .CharacterBtn{
+  border: solid 2px;
+  padding: 0.5rem;
+  border-color: green;
+  border-radius: 0.5rem;
+  background-color: #293241;
+  color: white;
+  cursor: pointer;
+}
+
+.character-card .CharInf button{
+  width: 100%;
+}
+
+.character-card:hover .CharInf{
+  opacity: 100%;
 }
 
 #PaginationsButtons {
@@ -252,6 +286,7 @@ body{
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  cursor: pointer;
 }
 
 .DisabledBtn{
@@ -263,6 +298,7 @@ body{
   border-radius: 0.5rem;
   background-color: #ffffff;
   color: rgb(0, 0, 0);
+  cursor: none;
 }
 
 .StyledBtn svg {

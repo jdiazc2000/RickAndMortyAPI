@@ -71,9 +71,11 @@ const FetchData = async (url) => {
 
   await fetch(url)
     .then((res) => res.json())
-    .then((data) => MostrarData(data.results))
+    .then((data) => {
+      MostrarData(data.results)
+    })
     .catch((err) => console.error(err));
-    
+
     SearchCharacterBtn.classList.add('StyledBtn')
     SearchCharacterBtn.classList.remove('DisabledBtn')
     LenguageBtn.classList.add('StyledBtn')
@@ -99,30 +101,31 @@ const MostrarData = (ApiData) => {
   } else {
     ApiData.forEach((character) => {
      //console.log(character)
-      let LenguageValue = JSON.parse(
-        localStorage.getItem("Lenguage")
-      ).LenguagePreff;
+      let LenguageValue = JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff;
 
       const CharacterDiv = document.createElement("div");
-      CharacterDiv.classList.add("CharacterDiv");
-
-      const ImgDiv = document.createElement("div");
-      ImgDiv.classList.add("ImgContainer")
+      CharacterDiv.classList.add("character-card");
+      CharacterDiv.classList.add("LoadingImg");
 
       const CharacterImage = document.createElement("img");
-      CharacterImage.src = character.image;
-      CharacterImage.setAttribute("loading", "lazy");
+      CharacterImage.src = character.image
+
       CharacterImage.setAttribute("title", "CharacterImage");
       CharacterImage.setAttribute("type", character.name + "_image");
       CharacterImage.classList.add("CharacterImage");
+
+      const CharInf = document.createElement('div')
+      CharInf.classList.add('CharInf')
 
       const CharacterName = document.createElement("h1");
       CharacterName.textContent = character.name;
 
       const CharacterStatus = document.createElement("p");
+      CharacterStatus.setAttribute("style", "display: flex; line-height: 1.2rem;");
 
       const CharacterBtn = document.createElement("button");
       CharacterBtn.setAttribute("id", character.id);
+      CharacterBtn.classList.add('CharacterBtn')
 
       if (!LenguageValue === false) {
         CharacterBtn.textContent = "Ver más";
@@ -166,13 +169,13 @@ const MostrarData = (ApiData) => {
           break;
       }
 
-      ImgDiv.appendChild(CharacterImage);
-      CharacterDiv.appendChild(ImgDiv);
-      CharacterDiv.appendChild(CharacterName);
-      CharacterDiv.appendChild(CharacterStatus);
+      CharacterDiv.appendChild(CharacterImage);
+      CharInf.appendChild(CharacterName);
+      CharInf.appendChild(CharacterStatus);
       CharacterStatus.appendChild(StatusColor);
-      CharacterDiv.appendChild(CharacterBtn);
-      return dataDiv.appendChild(CharacterDiv);
+      CharInf.appendChild(CharacterBtn);
+      CharacterDiv.appendChild(CharInf)
+      dataDiv.appendChild(CharacterDiv);
     });
   }
 };
