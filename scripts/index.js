@@ -109,7 +109,7 @@ const MostrarData = (ApiData) => {
 
       const CharacterImage = document.createElement("img");
       CharacterImage.src = character.image
-
+      CharacterImage.setAttribute("loading", "lazy");
       CharacterImage.setAttribute("title", "CharacterImage");
       CharacterImage.setAttribute("type", character.name + "_image");
       CharacterImage.classList.add("CharacterImage");
