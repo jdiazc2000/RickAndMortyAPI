@@ -1,4 +1,4 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -109,6 +109,7 @@ body {
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
 
+  line-height: 2.9rem;  
 }
 
 .CharacterInfo button {

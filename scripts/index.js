@@ -2,20 +2,20 @@
 let url = "https://rickandmortyapi.com/api/character";
 let SearchText = document.querySelector(".SearchText");
 let LenguagePrefference = JSON.parse(localStorage.getItem("Lenguage"));
-let PageCounter = 1
+let PageCounter = 1;
 
 const dataDiv = document.getElementById("Datadiv");
 const LoaderPortal = document.querySelector(".loader-div");
 const LenguageBtn = document.getElementById("changeLenguage_btn");
-const SearchCharacterBtn = document.getElementById('SrchCharBtn')
+const SearchCharacterBtn = document.getElementById("SrchCharBtn");
 const CharacterInput = document.getElementById("SearchCharacter");
-const ReturnPageBtn = document.getElementById('RetuPagBtn')
-const NextPageBtn = document.getElementById('NextPagBtn')
-const PaginationsButtons = document.getElementById('PaginationsButtons')
-const ResetSearchBtn = document.getElementById('ResetSearchBtn')
+const ReturnPageBtn = document.getElementById("RetuPagBtn");
+const NextPageBtn = document.getElementById("NextPagBtn");
+const PaginationsButtons = document.getElementById("PaginationsButtons");
+const ResetSearchBtn = document.getElementById("ResetSearchBtn");
 
 window.addEventListener("DOMContentLoaded", () => {
-  ResetSearchBtn.style.display='none'
+  ResetSearchBtn.style.display = "none";
   if (LenguagePrefference === null) {
     const Lenguage = {
       LenguagePreff: true,
@@ -48,111 +48,151 @@ const Translations_Gender = {
 };
 
 const HideReturnBtn = () => {
-  if(PageCounter === 1){
-    ReturnPageBtn.style.visibility = 'hidden'
-  }else{
-    ReturnPageBtn.style.visibility = 'visible'
+  if (PageCounter === 1) {
+    ReturnPageBtn.style.visibility = "hidden";
+  } else {
+    ReturnPageBtn.style.visibility = "visible";
   }
-}
+};
 
 const FetchData = async (url) => {
-
   const LoadingDataDiv = document.createElement("div");
   const LoadingDataText = document.createElement("h1");
-  
-  if (localStorage.getItem('Lenguage') != null && JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff != false) {
-    LoadingDataText.innerText = "Cargando Personajes...";
-  } else {
-    LoadingDataText.innerText = "Loading Characters...";
-  }
-  
+
   LoadingDataDiv.appendChild(LoadingDataText);
   dataDiv.appendChild(LoadingDataDiv);
-
+  
   await fetch(url)
     .then((res) => res.json())
-    .then((data) => {
-      MostrarData(data.results)
-    })
-    .catch((err) => console.error(err));
+    .then((data) => { 
+  
+    for (i = 1; i < data.results.length; i++) {
+        const CharacterDiv = document.createElement("div");
+        CharacterDiv.classList.add("character-card");
+        CharacterDiv.classList.add("LoadingImg");
 
-    SearchCharacterBtn.classList.add('StyledBtn')
-    SearchCharacterBtn.classList.remove('DisabledBtn')
-    LenguageBtn.classList.add('StyledBtn')
-    LenguageBtn.classList.remove('DisabledBtn')
-    
-    return LoadingDataDiv.remove()
+        dataDiv.appendChild(CharacterDiv);
+      }
+      MostrarData(data.results);
+    })
+    .catch((err) => {
+      const NotFoundDiv = document.createElement("div");
+      const NotFoundText = document.createElement("h1");
+
+      if (
+        !JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false
+      ) {
+        NotFoundText.innerText = "Personaje no encontrado :(";
+      } else {
+        NotFoundText.innerText = "Character not found :(";
+      }
+      NotFoundDiv.appendChild(NotFoundText);
+      dataDiv.appendChild(NotFoundDiv);
+      console.log(err);
+    });
+
+  SearchCharacterBtn.classList.add("StyledBtn");
+  SearchCharacterBtn.classList.remove("DisabledBtn");
+  LenguageBtn.classList.add("StyledBtn");
+  LenguageBtn.classList.remove("DisabledBtn");
+
+ return LoadingDataDiv.remove();
+
 };
 
 const MostrarData = (ApiData) => {
   if (ApiData === undefined) {
-
-    const NotFoundDiv = document.createElement("div");
-    const NotFoundText = document.createElement("h1");
-
-    if (!JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false) {
-      NotFoundText.innerText = "Personaje no encontrado :(";
-    } else {
-      NotFoundText.innerText = "Character not found :(";
-    }
-
     NotFoundDiv.appendChild(NotFoundText);
     return dataDiv.appendChild(NotFoundDiv);
   } else {
     ApiData.forEach((character) => {
-     //console.log(character)
-      let LenguageValue = JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff;
+      //console.log(character)
+      let LenguageValue = JSON.parse(
+        localStorage.getItem("Lenguage")
+      ).LenguagePreff;
 
       const CharacterDiv = document.createElement("div");
       CharacterDiv.classList.add("character-card");
       CharacterDiv.classList.add("LoadingImg");
 
       const CharacterImage = document.createElement("img");
-      CharacterImage.src = character.image
+      CharacterImage.src = character.image;
       CharacterImage.setAttribute("loading", "lazy");
       CharacterImage.setAttribute("title", "CharacterImage");
       CharacterImage.setAttribute("type", character.name + "_image");
       CharacterImage.classList.add("CharacterImage");
 
-      const CharInf = document.createElement('div')
-      CharInf.classList.add('CharInf')
+      const CharInf = document.createElement("div");
+      CharInf.classList.add("CharInf");
 
       const CharacterName = document.createElement("h1");
       CharacterName.textContent = character.name;
 
       const CharacterStatus = document.createElement("p");
-      CharacterStatus.setAttribute("style", "display: flex; line-height: 1.2rem;");
+      CharacterStatus.setAttribute(
+        "style",
+        "display: flex; line-height: 1.2rem;"
+      );
 
       const CharacterBtn = document.createElement("button");
       CharacterBtn.setAttribute("id", character.id);
-      CharacterBtn.classList.add('CharacterBtn')
+      CharacterBtn.classList.add("CharacterBtn");
 
       if (!LenguageValue === false) {
         CharacterBtn.textContent = "Ver más";
 
         //I personally will use switch statement but doesn't work too well with two conditions :(.
-        if(character.status === 'Alive' && character.gender === 'Male'){
-          CharacterStatus.innerText = Translations_Gender.Male +  " - " + Translations_Status.Alive 
-        }else if (character.status === 'Alive' && character.gender === 'Female'){
-          CharacterStatus.innerText = Translations_Gender.Female + " - " + Translations_Status.Alive 
-        }else if (character.status === 'Dead' && character.gender === 'Male'){
-          CharacterStatus.innerText = Translations_Gender.Male + " - "  + Translations_Status.Dead
-        }else if (character.status === 'Dead' && character.gender === 'Female'){
-          CharacterStatus.innerText = Translations_Gender.Female + " - " +  Translations_Status.Dead 
-        }else if (character.status === 'unknown' && character.gender === 'Male'){
-          CharacterStatus.innerText = Translations_Gender.Male + " - " + Translations_Status.unknown 
-        }else if (character.status === 'unknown' && character.gender === 'Female'){
-          CharacterStatus.innerText = Translations_Gender.Female + " - "  + Translations_Status.unknown
-        }else if (character.status === 'unknown' && character.gender === 'unknown'){
-          CharacterStatus.innerText = Translations_Gender.unknown + " - " + Translations_Status.unknown 
-        }else if (character.status === 'Alive' && character.gender === 'unknown'){
-          CharacterStatus.innerText = Translations_Gender.unknown + " - " + Translations_Status.Alive 
-        }else if (character.status === 'Dead' && character.gender === 'unknown'){
-          CharacterStatus.innerText = Translations_Gender.unknown + " - " + Translations_Status.Dead 
+        if (character.status === "Alive" && character.gender === "Male") {
+          CharacterStatus.innerText =
+            Translations_Gender.Male + " - " + Translations_Status.Alive;
+        } else if (
+          character.status === "Alive" &&
+          character.gender === "Female"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.Female + " - " + Translations_Status.Alive;
+        } else if (character.status === "Dead" && character.gender === "Male") {
+          CharacterStatus.innerText =
+            Translations_Gender.Male + " - " + Translations_Status.Dead;
+        } else if (
+          character.status === "Dead" &&
+          character.gender === "Female"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.Female + " - " + Translations_Status.Dead;
+        } else if (
+          character.status === "unknown" &&
+          character.gender === "Male"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.Male + " - " + Translations_Status.unknown;
+        } else if (
+          character.status === "unknown" &&
+          character.gender === "Female"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.Female + " - " + Translations_Status.unknown;
+        } else if (
+          character.status === "unknown" &&
+          character.gender === "unknown"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.unknown + " - " + Translations_Status.unknown;
+        } else if (
+          character.status === "Alive" &&
+          character.gender === "unknown"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.unknown + " - " + Translations_Status.Alive;
+        } else if (
+          character.status === "Dead" &&
+          character.gender === "unknown"
+        ) {
+          CharacterStatus.innerText =
+            Translations_Gender.unknown + " - " + Translations_Status.Dead;
         }
-
       } else {
-        CharacterStatus.innerText = character.gender + " - " + character.status
+        CharacterStatus.innerText = character.gender + " - " + character.status;
         CharacterBtn.textContent = "Show more";
       }
 
@@ -174,7 +214,8 @@ const MostrarData = (ApiData) => {
       CharInf.appendChild(CharacterStatus);
       CharacterStatus.appendChild(StatusColor);
       CharInf.appendChild(CharacterBtn);
-      CharacterDiv.appendChild(CharInf)
+      CharacterDiv.appendChild(CharInf);
+      dataDiv.firstChild.remove();
       dataDiv.appendChild(CharacterDiv);
     });
   }
@@ -184,30 +225,30 @@ SearchCharacterBtn.addEventListener("click", () => {
   const filter = SearchCharacter.value.toLowerCase();
 
   if (filter.length != 0) {
-    SearchCharacterBtn.classList.remove('StyledBtn')
-    SearchCharacterBtn.classList.add('DisabledBtn')
-    SearchCharacterBtn.setAttribute('disabled','disabled')
+    SearchCharacterBtn.classList.remove("StyledBtn");
+    SearchCharacterBtn.classList.add("DisabledBtn");
+    SearchCharacterBtn.setAttribute("disabled", "disabled");
 
     url = `https://rickandmortyapi.com/api/character/?name=${filter}`;
-    PaginationsButtons.style.visibility='hidden'
-    ReturnPageBtn.style.visibility= 'hidden'
-    ResetSearchBtn.style.display='block'
+    PaginationsButtons.style.visibility = "hidden";
+    ReturnPageBtn.style.visibility = "hidden";
+    ResetSearchBtn.style.display = "block";
 
     dataDiv.innerHTML = "";
-    SearchCharacterBtn.removeAttribute('disabled')
-    return FetchData(url)
+    SearchCharacterBtn.removeAttribute("disabled");
+    return FetchData(url);
   }
 });
 
-ResetSearchBtn.addEventListener('click', () => {
-  url = 'https://rickandmortyapi.com/api/character'
-  SearchCharacter.value = ''
-  PaginationsButtons.style.visibility='visible'
-  ResetSearchBtn.style.display='none'
-  ReturnPageBtn.style.visibility= 'hidden'
+ResetSearchBtn.addEventListener("click", () => {
+  url = "https://rickandmortyapi.com/api/character";
+  SearchCharacter.value = "";
+  PaginationsButtons.style.visibility = "visible";
+  ResetSearchBtn.style.display = "none";
+  ReturnPageBtn.style.visibility = "hidden";
   dataDiv.innerHTML = "";
   return FetchData(url);
-})
+});
 
 LenguageBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -246,9 +287,9 @@ LenguageBtn.addEventListener("click", (e) => {
       localStorage.getItem("Lenguage")
     ).SearchText;
   }
-  
-  LenguageBtn.classList.remove('StyledBtn')
-  LenguageBtn.classList.add('DisabledBtn')
+
+  LenguageBtn.classList.remove("StyledBtn");
+  LenguageBtn.classList.add("DisabledBtn");
   dataDiv.innerHTML = "";
   return FetchData(url);
 });
@@ -270,29 +311,28 @@ dataDiv.addEventListener("click", async (e) => {
     setTimeout(() => {
       LoaderPortal.classList.add("loading_off");
       document.body.style.overflow = "";
-      return location.href = `/character.html`;
+      return (location.href = `/character.html`);
     }, 1000);
-
   }
 });
 
-NextPageBtn.addEventListener('click', () => {
-  PageCounter = PageCounter + 1
-  ReturnPageBtn.style.visibility = 'visible'
+NextPageBtn.addEventListener("click", () => {
+  PageCounter = PageCounter + 1;
+  ReturnPageBtn.style.visibility = "visible";
   dataDiv.innerHTML = "";
-  url = `https://rickandmortyapi.com/api/character?page=${PageCounter}`
-  return FetchData(url)
-})
+  url = `https://rickandmortyapi.com/api/character?page=${PageCounter}`;
+  return FetchData(url);
+});
 
-ReturnPageBtn.addEventListener('click', () => {
-  if(PageCounter != 1){
-    PageCounter = PageCounter - 1
+ReturnPageBtn.addEventListener("click", () => {
+  if (PageCounter != 1) {
+    PageCounter = PageCounter - 1;
     dataDiv.innerHTML = "";
-    url = `https://rickandmortyapi.com/api/character?page=${PageCounter}`
-    FetchData(url)
-    return HideReturnBtn()
+    url = `https://rickandmortyapi.com/api/character?page=${PageCounter}`;
+    FetchData(url);
+    return HideReturnBtn();
   }
-})
+});
 
-HideReturnBtn()
+HideReturnBtn();
 FetchData(url);

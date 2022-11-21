@@ -188,6 +188,7 @@ body{
   max-height: 310px;
   overflow: hidden;
   border-radius: 1rem;
+
   aspect-ratio: 100 / 103;
 }
 
@@ -236,17 +237,13 @@ body{
   padding: 1rem;
   overflow-wrap: break-word;
   opacity: 0%;
+  transform: translateY(100%);
 }
 
-@media(max-width: 220px){
-  .character-card .CharInf{
-    line-height: 1.5rem;
-  }
-  .character-card .CharInf h1{
-   font-size: 1rem;
-  }
+.character-card:hover .CharInf{
+  opacity: 100%;
+  transform: translateY(0%);
 }
-
 
 .character-card .CharInf .CharacterBtn{
   border: solid 2px;
@@ -262,9 +259,7 @@ body{
   width: 100%;
 }
 
-.character-card:hover .CharInf{
-  opacity: 100%;
-}
+
 
 #PaginationsButtons {
   border: solid green 2px;
@@ -300,4 +295,16 @@ body{
 .StyledBtn svg {
   width: 25px;
   height: 25px;
+}
+
+
+/*  Media Queries */
+
+@media(max-width: 220px){
+  .character-card .CharInf{
+    line-height: 1.5rem;
+  }
+  .character-card .CharInf h1{
+   font-size: 1rem;
+  }
 }
