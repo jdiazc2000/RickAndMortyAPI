@@ -192,6 +192,52 @@ body{
   aspect-ratio: 100 / 103;
 }
 
+.character-card .statusbox {
+  display: block;
+  position: absolute;
+  width: 10rem;
+  font-size: 10px;
+  text-align: end;
+  top: 0;
+  right: 0;
+  color: white;
+  margin-top: 2rem;
+  margin-right: -8.3rem;
+
+  -webkit-border-top-left-radius: 140px;
+  -webkit-border-bottom-left-radius: 140px;
+  -moz-border-radius-topleft: 140px;
+  -moz-border-radius-bottomleft: 140px;
+  border-top-left-radius: 140px;
+  border-bottom-left-radius: 140px;
+  transition: all 0.3s ease-out;
+}
+
+.character-card .statusbox h1{
+  margin-right: 0.5rem;
+}
+
+.character-card .statusbox.Alive{
+    background-color: green;
+    border: solid green 2px;
+}
+
+.character-card .statusbox.Dead{
+    background-color: red;
+    border: solid red 2px;
+}
+
+.character-card .statusbox.Unknown{
+    background-color: grey;
+    border: solid grey 2px;
+}
+
+
+.character-card:hover .statusbox {
+    margin-right: 0rem;
+}
+
+
 .character-card:hover{
   background: radial-gradient(#111 50%, #000 100%);
   box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
@@ -300,7 +346,7 @@ body{
 
 /*  Media Queries */
 
-@media(max-width: 220px){
+@media(max-width: 246px){
   .character-card .CharInf{
     line-height: 1.5rem;
   }

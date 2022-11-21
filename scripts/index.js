@@ -122,6 +122,22 @@ const MostrarData = (ApiData) => {
       CharacterImage.setAttribute("type", character.name + "_image");
       CharacterImage.classList.add("CharacterImage");
 
+      const CharStatus = document.createElement('div')
+      CharStatus.classList.add('statusbox')
+      const StatusText = document.createElement('h1')
+      
+      switch(character.status){
+        case 'Alive':
+          CharStatus.classList.add('Alive')
+        break;
+        case 'Dead':
+          CharStatus.classList.add('Dead')
+        break;
+        case 'unknown':
+          CharStatus.classList.add('Unknown')
+        break;
+      }
+
       const CharInf = document.createElement("div");
       CharInf.classList.add("CharInf");
 
@@ -129,10 +145,6 @@ const MostrarData = (ApiData) => {
       CharacterName.textContent = character.name;
 
       const CharacterStatus = document.createElement("p");
-      CharacterStatus.setAttribute(
-        "style",
-        "display: flex; line-height: 1.2rem;"
-      );
 
       const CharacterBtn = document.createElement("button");
       CharacterBtn.setAttribute("id", character.id);
@@ -143,56 +155,36 @@ const MostrarData = (ApiData) => {
 
         //I personally will use switch statement but doesn't work too well with two conditions :(.
         if (character.status === "Alive" && character.gender === "Male") {
-          CharacterStatus.innerText =
-            Translations_Gender.Male + " - " + Translations_Status.Alive;
-        } else if (
-          character.status === "Alive" &&
-          character.gender === "Female"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.Female + " - " + Translations_Status.Alive;
+          StatusText.innerText = Translations_Status.Alive
+          CharacterStatus.innerText = Translations_Gender.Male
+        } else if (character.status === "Alive" && character.gender === "Female") {
+          StatusText.innerText = Translations_Status.Alive
+          CharacterStatus.innerText = Translations_Gender.Female
         } else if (character.status === "Dead" && character.gender === "Male") {
-          CharacterStatus.innerText =
-            Translations_Gender.Male + " - " + Translations_Status.Dead;
-        } else if (
-          character.status === "Dead" &&
-          character.gender === "Female"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.Female + " - " + Translations_Status.Dead;
-        } else if (
-          character.status === "unknown" &&
-          character.gender === "Male"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.Male + " - " + Translations_Status.unknown;
-        } else if (
-          character.status === "unknown" &&
-          character.gender === "Female"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.Female + " - " + Translations_Status.unknown;
-        } else if (
-          character.status === "unknown" &&
-          character.gender === "unknown"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.unknown + " - " + Translations_Status.unknown;
-        } else if (
-          character.status === "Alive" &&
-          character.gender === "unknown"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.unknown + " - " + Translations_Status.Alive;
-        } else if (
-          character.status === "Dead" &&
-          character.gender === "unknown"
-        ) {
-          CharacterStatus.innerText =
-            Translations_Gender.unknown + " - " + Translations_Status.Dead;
+          StatusText.innerText = Translations_Status.Dead
+          CharacterStatus.innerText = Translations_Gender.Male
+        } else if (character.status === "Dead" && character.gender === "Female") {
+          StatusText.innerText = Translations_Status.Dead
+          CharacterStatus.innerText = Translations_Gender.Female
+        } else if (character.status === "unknown" && character.gender === "Male") {
+          StatusText.innerText = Translations_Status.unknown
+          CharacterStatus.innerText = Translations_Gender.Male
+        } else if (character.status === "unknown" && character.gender === "Female") {
+          StatusText.innerText = Translations_Status.unknown
+          CharacterStatus.innerText = Translations_Gender.Female
+        } else if (character.status === "unknown" && character.gender === "unknown") {
+          StatusText.innerText = Translations_Status.unknown
+          CharacterStatus.innerText = Translations_Gender.unknown
+        } else if (character.status === "Alive" && character.gender === "unknown") {
+          StatusText.innerText = Translations_Status.Alive
+          CharacterStatus.innerText = Translations_Gender.unknown
+        } else if (character.status === "Dead" && character.gender === "unknown") {
+          StatusText.innerText = Translations_Status.Dead
+          CharacterStatus.innerText = Translations_Gender.unknown
         }
       } else {
-        CharacterStatus.innerText = character.gender + " - " + character.status;
+        CharacterStatus.innerText = character.gender
+        StatusText.innerText = character.status
         CharacterBtn.textContent = "Show more";
       }
 
@@ -210,9 +202,10 @@ const MostrarData = (ApiData) => {
       }
 
       CharacterDiv.appendChild(CharacterImage);
+      CharStatus.appendChild(StatusText)
+      CharacterDiv.appendChild(CharStatus)
       CharInf.appendChild(CharacterName);
       CharInf.appendChild(CharacterStatus);
-      CharacterStatus.appendChild(StatusColor);
       CharInf.appendChild(CharacterBtn);
       CharacterDiv.appendChild(CharInf);
       dataDiv.firstChild.remove();
