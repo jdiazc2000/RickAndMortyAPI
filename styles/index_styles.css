@@ -4,11 +4,6 @@
   box-sizing: border-box;
   font-family: "Sniglet", cursive;
 }
-/* 
-body{
-	 background: #293241;
-}
-*/
 
 .Header {
   display: flex;

@@ -245,6 +245,7 @@ ResetSearchBtn.addEventListener("click", () => {
 
 LenguageBtn.addEventListener("click", (e) => {
   e.preventDefault();
+  let DataLenght = document.querySelectorAll('div.CharInf h1').length
   let value = JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff;
 
   if (!value) {
@@ -256,13 +257,43 @@ LenguageBtn.addEventListener("click", (e) => {
 
     localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
 
-    LenguageBtn.innerText = JSON.parse(
-      localStorage.getItem("Lenguage")
-    ).TextBtn;
+    LenguageBtn.innerText = JSON.parse(localStorage.getItem("Lenguage")).TextBtn;
 
-    SearchText.innerText = JSON.parse(
-      localStorage.getItem("Lenguage")
-    ).SearchText;
+    SearchText.innerText = JSON.parse(localStorage.getItem("Lenguage")).SearchText;
+
+    for(i = 0; i < DataLenght; i++){ 
+      document.querySelectorAll('div.CharInf button')[i].textContent = 'Ver más'
+    }
+
+    for(i = 0; i < DataLenght; i++){
+      switch(document.querySelectorAll('div.CharInf p')[i].textContent){
+        case 'Male':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'Masculino'
+        break;
+        case 'Female':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'Femenino'
+        break;
+        case 'unknown':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'Desconocido'
+        break;
+      }
+    }
+
+
+    for(i = 0; i < DataLenght; i++){
+      switch(document.querySelectorAll('div.statusbox h1')[i].textContent){
+        case 'Alive':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'Con vida'
+        break;
+        case 'Dead':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'Muerto'
+        break;
+        case 'unknown':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'Desaparecido'
+        break;
+      }
+    }
+
   } else {
     const Lenguage = {
       LenguagePreff: false,
@@ -272,19 +303,42 @@ LenguageBtn.addEventListener("click", (e) => {
 
     localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
 
-    LenguageBtn.innerText = JSON.parse(
-      localStorage.getItem("Lenguage")
-    ).TextBtn;
+    LenguageBtn.innerText = JSON.parse(localStorage.getItem("Lenguage")).TextBtn;
 
-    SearchText.innerText = JSON.parse(
-      localStorage.getItem("Lenguage")
-    ).SearchText;
+    SearchText.innerText = JSON.parse(localStorage.getItem("Lenguage")).SearchText;
+    
+    for(i = 0; i < DataLenght; i++){ 
+      document.querySelectorAll('div.CharInf button')[i].textContent = 'Show more'
+    }
+
+    for(i = 0; i < DataLenght; i++){
+      switch(document.querySelectorAll('div.statusbox h1')[i].textContent){
+        case 'Con vida':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'Alive'
+        break;
+        case 'Muerto':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'Dead'
+        break;
+        case 'Desaparecido':
+        document.querySelectorAll('div.statusbox h1')[i].textContent = 'unknown'
+        break;
+      }
+    }
+
+    for(i = 0; i < DataLenght; i++){
+      switch(document.querySelectorAll('div.CharInf p')[i].textContent){
+        case 'Masculino':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'Male'
+        break;
+        case 'Femenino':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'Female'
+        break;
+        case 'Desaparecido':
+        document.querySelectorAll('div.CharInf p')[i].textContent = 'unknown'
+        break;
+      }
+    }
   }
-
-  LenguageBtn.classList.remove("StyledBtn");
-  LenguageBtn.classList.add("DisabledBtn");
-  dataDiv.innerHTML = "";
-  return FetchData(url);
 });
 
 dataDiv.addEventListener("click", async (e) => {
