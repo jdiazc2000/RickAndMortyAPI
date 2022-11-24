@@ -59,6 +59,7 @@ header img{
   height: 100%;
   animation: PortalReveal 1.5s ease-in-out;
   -webkit-filter: drop-shadow(12px 12px 10px rgba(0, 135, 27, 0.5));
+  filter: drop-shadow(12px 12px 10px rgba(0, 135, 27, 0.5));
 }
 
 @keyframes PortalReveal{
