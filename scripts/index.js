@@ -15,24 +15,9 @@ const PaginationsButtons = document.getElementById("PaginationsButtons");
 const ResetSearchBtn = document.getElementById("ResetSearchBtn");
 
 window.addEventListener("DOMContentLoaded", () => {
-  ResetSearchBtn.style.display = "none";
-  if (LenguagePrefference === null) {
-    const Lenguage = {
-      LenguagePreff: true,
-      TextBtn: "ENG",
-      SearchText: "Buscar personaje",
-    };
-
-    localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
-
-    LenguagePrefference = JSON.parse(localStorage.getItem("Lenguage"));
-
+    ResetSearchBtn.style.display = "none";
     LenguageBtn.innerText = LenguagePrefference.TextBtn;
     SearchText.innerText = LenguagePrefference.SearchText;
-  } else {
-    LenguageBtn.innerText = LenguagePrefference.TextBtn;
-    SearchText.innerText = LenguagePrefference.SearchText;
-  }
 });
 
 const Translations_Status = {
@@ -53,6 +38,17 @@ const FetchData = async (url) => {
   const LoadingDataText = document.createElement("h1");
   const LoadingProgress = document.createElement('div')
   const LoadingProgress_Text = document.createElement('h1')
+
+  if(JSON.parse(localStorage.getItem("Lenguage")) === null){
+    const Lenguage = {
+      LenguagePreff: true,
+      TextBtn: "ENG",
+      SearchText: "Buscar personaje",
+    };
+
+    localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
+    LenguagePrefference = JSON.parse(localStorage.getItem("Lenguage"));
+  }
 
   if (!JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false){
     LoadingDataText.innerText = 'Cargando...'
