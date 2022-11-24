@@ -4,7 +4,7 @@ let LenguagePrefference = JSON.parse(localStorage.getItem("Lenguage"));
 let PageCounter = 1;
 
 const SearchText = document.querySelector(".SearchText");
-const dataDiv = document.getElementById("Datadiv");
+const dataDiv = document.querySelector(".Datadiv");
 const LoaderPortal = document.querySelector(".loader-div");
 const LenguageBtn = document.getElementById("changeLenguage_btn");
 const SearchCharacterBtn = document.getElementById("SrchCharBtn");
@@ -46,11 +46,11 @@ const Translations_Gender = {
   Female: "Femenino",
   unknown: "Desconocido",
 };
+    
 
 const FetchData = async (url) => {
   const LoadingDataDiv = document.createElement("div");
   const LoadingDataText = document.createElement("h1");
-
   const LoadingProgress = document.createElement('div')
   const LoadingProgress_Text = document.createElement('h1')
 
@@ -59,14 +59,15 @@ const FetchData = async (url) => {
   }else{
     LoadingDataText.innerText = `Loading...`
   }
+  
+  LoadingDataDiv.style.margin = '0 auto'
   PaginationsButtons.style.display = 'none'
-  HideReturnBtn()
 
   LoadingProgress.appendChild(LoadingProgress_Text)
   dataDiv.appendChild(LoadingProgress)
-
   LoadingDataDiv.appendChild(LoadingDataText);
   dataDiv.appendChild(LoadingDataDiv);
+  HideReturnBtn()
   
   await fetch(url)
     .then((res) => res.json())
@@ -84,6 +85,7 @@ const FetchData = async (url) => {
       LenguageBtn.removeAttribute("disabled");
       LoadingProgress.remove()
       PaginationsButtons.style.display = 'block'
+
       MostrarData(data.results);
     })
     .catch((err) => {
@@ -100,6 +102,7 @@ const FetchData = async (url) => {
         NotFoundText.innerText = "Character not found :(";
       }
       
+      NotFoundDiv.style = 'margin: 0 auto;'
       NotFoundDiv.appendChild(NotFoundText);
       LoadingProgress.remove()
       dataDiv.appendChild(NotFoundDiv);
@@ -408,7 +411,7 @@ dataDiv.addEventListener("click", async (e) => {
   }
 });
 
-NextPageBtn.addEventListener("click", () => {
+NextPageBtn.addEventListener("click", (e) => {
   PageCounter = PageCounter + 1;
   ReturnPageBtn.style.display = "inline";
   dataDiv.innerHTML = "";
