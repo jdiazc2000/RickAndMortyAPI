@@ -3,6 +3,21 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Sniglet", cursive;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.686), rgba(0, 0, 0, 0.683));
+  background-size: cover;
+  height: 100vh;
+  background-position: center center;
 }
 
 .Header {
@@ -78,59 +93,6 @@
   width: 97%;
 }
 
-
-.CharStatus_red {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 100%;
-  border: solid rgb(255, 255, 255) 1px;
-  background-color: red;
-  margin-left: 0.3rem;
-
-  animation: statusanimation_red 2s infinite ease-in-out;
-}
-
-@keyframes statusanimation_red {
-  50% {
-    box-shadow: 0px 0px 5px rgb(255, 48, 48);
-  }
-}
-
-.CharStatus_green {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 100%;
-  border: solid rgb(255, 255, 255) 1px;
-  background-color: green;
-  margin-left: 0.3rem;
-
-  animation: statusanimation_green 2s infinite ease-in-out;
-}
-
-@keyframes statusanimation_green {
-  50% {
-    box-shadow: 0px 0px 5px rgb(0, 156, 0);
-  }
-}
-
-.CharStatus_grey {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 100%;
-  border: solid rgb(255, 255, 255) 1px;
-  line-height: 1rem;
-  background-color: grey;
-  margin-left: 0.3rem;
-
-  animation: statusanimation_grey 2s infinite ease-in-out;
-}
-
-@keyframes statusanimation_grey {
-  50% {
-    box-shadow: 0px 0px 5px rgb(163, 163, 163);
-  }
-}
-
 .loader-div {
   z-index: 1;
   position: fixed;
@@ -190,14 +152,14 @@
 .character-card .statusbox {
   display: block;
   position: absolute;
-  width: 10rem;
+  display: inline-block;
   font-size: 10px;
   text-align: end;
   top: 0;
   right: 0;
   color: white;
   margin-top: 2rem;
-  margin-right: -8.3rem;
+
 
   -webkit-border-top-left-radius: 140px;
   -webkit-border-bottom-left-radius: 140px;
@@ -205,37 +167,66 @@
   -moz-border-radius-bottomleft: 140px;
   border-top-left-radius: 140px;
   border-bottom-left-radius: 140px;
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
-.character-card .statusbox h1{
-  margin-right: 0.5rem;
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.character-card .statusbox.Alive_ESP{
+    background-color: green;
+    border: solid green 2px;
+    margin-right: -5.55rem;
+}
+
+.character-card .statusbox.Dead_ESP{
+    background-color: red;
+    margin-right: -4.75rem;
+    border: solid red 2px;
+}
+
+.character-card .statusbox.Unknown_ESP{
+    background-color: grey;
+    margin-right: -8.62rem;
+    border: solid grey 2px;
 }
 
 .character-card .statusbox.Alive{
     background-color: green;
     border: solid green 2px;
+    margin-right: -3.4rem;
 }
 
 .character-card .statusbox.Dead{
     background-color: red;
+    margin-right: -3.7rem;
     border: solid red 2px;
 }
 
 .character-card .statusbox.Unknown{
     background-color: grey;
+    margin-right: -6rem;
     border: solid grey 2px;
 }
 
-
-.character-card:hover .statusbox {
-    margin-right: 0rem;
+.character-card h1 {
+  opacity: 100%;
+  margin: 0 auto;
+  margin-left: 30px;
+  margin-right: 0.5rem;
 }
-
 
 .character-card:hover{
   background: radial-gradient(#111 50%, #000 100%);
   box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.75);
+}
+
+.character-card:hover .statusbox{
+  margin-right: 0px;
 }
 
 .character-card img{
@@ -296,14 +287,15 @@
   cursor: pointer;
 }
 
+.character-card .CharInf h1{
+  margin-left: 0px;
+}
+
 .character-card .CharInf button{
   width: 100%;
 }
 
-
-
 #PaginationsButtons {
-  border: solid green 2px;
   text-align: center;
 }
 
@@ -320,7 +312,7 @@
   user-select: none; /* Standard syntax */
   cursor: pointer;
 }
-
+ 
 .DisabledBtn{
   pointer-events: none;
   border: solid 2px;

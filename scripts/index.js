@@ -1,9 +1,9 @@
 //Environment Variables.
 let url = "https://rickandmortyapi.com/api/character";
-let SearchText = document.querySelector(".SearchText");
 let LenguagePrefference = JSON.parse(localStorage.getItem("Lenguage"));
 let PageCounter = 1;
 
+const SearchText = document.querySelector(".SearchText");
 const dataDiv = document.getElementById("Datadiv");
 const LoaderPortal = document.querySelector(".loader-div");
 const LenguageBtn = document.getElementById("changeLenguage_btn");
@@ -47,17 +47,21 @@ const Translations_Gender = {
   unknown: "Desconocido",
 };
 
-const HideReturnBtn = () => {
-  if (PageCounter === 1) {
-    ReturnPageBtn.style.visibility = "hidden";
-  } else {
-    ReturnPageBtn.style.visibility = "visible";
-  }
-};
-
 const FetchData = async (url) => {
   const LoadingDataDiv = document.createElement("div");
   const LoadingDataText = document.createElement("h1");
+
+  const LoadingProgress = document.createElement('div')
+  const LoadingProgress_Text = document.createElement('h1')
+
+  if (!JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false){
+    LoadingDataText.innerText = 'Cargando...'
+  }else{
+    LoadingDataText.innerText = `Loading...`
+  }
+
+  LoadingProgress.appendChild(LoadingProgress_Text)
+  dataDiv.appendChild(LoadingProgress)
 
   LoadingDataDiv.appendChild(LoadingDataText);
   dataDiv.appendChild(LoadingDataDiv);
@@ -73,28 +77,34 @@ const FetchData = async (url) => {
 
         dataDiv.appendChild(CharacterDiv);
       }
+      LenguageBtn.classList.add("StyledBtn");
+      LenguageBtn.classList.remove("DisabledBtn");
+      LenguageBtn.removeAttribute("disabled");
+      LoadingProgress.remove()
       MostrarData(data.results);
     })
     .catch((err) => {
       const NotFoundDiv = document.createElement("div");
       const NotFoundText = document.createElement("h1");
 
-      if (
-        !JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false
-      ) {
+      LenguageBtn.classList.remove("StyledBtn");
+      LenguageBtn.classList.add("DisabledBtn");
+      LenguageBtn.setAttribute("disabled", "disabled");
+
+      if (!JSON.parse(localStorage.getItem("Lenguage")).LenguagePreff === false) {
         NotFoundText.innerText = "Personaje no encontrado :(";
       } else {
         NotFoundText.innerText = "Character not found :(";
       }
+      
       NotFoundDiv.appendChild(NotFoundText);
+      LoadingProgress.remove()
       dataDiv.appendChild(NotFoundDiv);
-      console.log(err);
+      console.log('Data not found :(');
     });
 
   SearchCharacterBtn.classList.add("StyledBtn");
   SearchCharacterBtn.classList.remove("DisabledBtn");
-  LenguageBtn.classList.add("StyledBtn");
-  LenguageBtn.classList.remove("DisabledBtn");
 
  return LoadingDataDiv.remove();
 
@@ -126,25 +136,13 @@ const MostrarData = (ApiData) => {
       CharStatus.classList.add('statusbox')
       const StatusText = document.createElement('h1')
       
-      switch(character.status){
-        case 'Alive':
-          CharStatus.classList.add('Alive')
-        break;
-        case 'Dead':
-          CharStatus.classList.add('Dead')
-        break;
-        case 'unknown':
-          CharStatus.classList.add('Unknown')
-        break;
-      }
-
       const CharInf = document.createElement("div");
       CharInf.classList.add("CharInf");
 
       const CharacterName = document.createElement("h1");
       CharacterName.textContent = character.name;
 
-      const CharacterStatus = document.createElement("p");
+      const CharacterGender = document.createElement("p");
 
       const CharacterBtn = document.createElement("button");
       CharacterBtn.setAttribute("id", character.id);
@@ -153,37 +151,60 @@ const MostrarData = (ApiData) => {
       if (!LenguageValue === false) {
         CharacterBtn.textContent = "Ver más";
 
+        switch(character.status){
+          case 'Alive':
+            CharStatus.classList.add('Alive_ESP')
+          break;
+          case 'Dead':
+            CharStatus.classList.add('Dead_ESP')
+          break;
+          case 'unknown':
+            CharStatus.classList.add('Unknown_ESP')
+          break;
+        }
+
         //I personally will use switch statement but doesn't work too well with two conditions :(.
         if (character.status === "Alive" && character.gender === "Male") {
           StatusText.innerText = Translations_Status.Alive
-          CharacterStatus.innerText = Translations_Gender.Male
+          CharacterGender.innerText = Translations_Gender.Male
         } else if (character.status === "Alive" && character.gender === "Female") {
           StatusText.innerText = Translations_Status.Alive
-          CharacterStatus.innerText = Translations_Gender.Female
+          CharacterGender.innerText = Translations_Gender.Female
         } else if (character.status === "Dead" && character.gender === "Male") {
           StatusText.innerText = Translations_Status.Dead
-          CharacterStatus.innerText = Translations_Gender.Male
+          CharacterGender.innerText = Translations_Gender.Male
         } else if (character.status === "Dead" && character.gender === "Female") {
           StatusText.innerText = Translations_Status.Dead
-          CharacterStatus.innerText = Translations_Gender.Female
+          CharacterGender.innerText = Translations_Gender.Female
         } else if (character.status === "unknown" && character.gender === "Male") {
           StatusText.innerText = Translations_Status.unknown
-          CharacterStatus.innerText = Translations_Gender.Male
+          CharacterGender.innerText = Translations_Gender.Male
         } else if (character.status === "unknown" && character.gender === "Female") {
           StatusText.innerText = Translations_Status.unknown
-          CharacterStatus.innerText = Translations_Gender.Female
+          CharacterGender.innerText = Translations_Gender.Female
         } else if (character.status === "unknown" && character.gender === "unknown") {
           StatusText.innerText = Translations_Status.unknown
-          CharacterStatus.innerText = Translations_Gender.unknown
+          CharacterGender.innerText = Translations_Gender.unknown
         } else if (character.status === "Alive" && character.gender === "unknown") {
           StatusText.innerText = Translations_Status.Alive
-          CharacterStatus.innerText = Translations_Gender.unknown
+          CharacterGender.innerText = Translations_Gender.unknown
         } else if (character.status === "Dead" && character.gender === "unknown") {
           StatusText.innerText = Translations_Status.Dead
-          CharacterStatus.innerText = Translations_Gender.unknown
+          CharacterGender.innerText = Translations_Gender.unknown
         }
       } else {
-        CharacterStatus.innerText = character.gender
+        switch(character.status){
+          case 'Alive':
+            CharStatus.classList.add('Alive')
+          break;
+          case 'Dead':
+            CharStatus.classList.add('Dead')
+          break;
+          case 'unknown':
+            CharStatus.classList.add('Unknown')
+          break;
+        }
+        CharacterGender.innerText = character.gender
         StatusText.innerText = character.status
         CharacterBtn.textContent = "Show more";
       }
@@ -205,7 +226,7 @@ const MostrarData = (ApiData) => {
       CharStatus.appendChild(StatusText)
       CharacterDiv.appendChild(CharStatus)
       CharInf.appendChild(CharacterName);
-      CharInf.appendChild(CharacterStatus);
+      CharInf.appendChild(CharacterGender);
       CharInf.appendChild(CharacterBtn);
       CharacterDiv.appendChild(CharInf);
       dataDiv.firstChild.remove();
@@ -224,8 +245,8 @@ SearchCharacterBtn.addEventListener("click", () => {
 
     url = `https://rickandmortyapi.com/api/character/?name=${filter}`;
     PaginationsButtons.style.visibility = "hidden";
-    ReturnPageBtn.style.visibility = "hidden";
-    ResetSearchBtn.style.display = "block";
+    ReturnPageBtn.style.display = "inline";
+    ResetSearchBtn.style.display = "inline";
 
     dataDiv.innerHTML = "";
     SearchCharacterBtn.removeAttribute("disabled");
@@ -234,11 +255,17 @@ SearchCharacterBtn.addEventListener("click", () => {
 });
 
 ResetSearchBtn.addEventListener("click", () => {
+  if(LenguageBtn.classList[0] == 'DisabledBtn'){
+    LenguageBtn.classList.remove("DisabledBtn");
+    LenguageBtn.classList.add("StyledBtn");
+    LenguageBtn.removeAttribute("disabled");
+  }
+
   url = "https://rickandmortyapi.com/api/character";
   SearchCharacter.value = "";
   PaginationsButtons.style.visibility = "visible";
   ResetSearchBtn.style.display = "none";
-  ReturnPageBtn.style.visibility = "hidden";
+  ReturnPageBtn.style.display = "inline";
   dataDiv.innerHTML = "";
   return FetchData(url);
 });
@@ -256,16 +283,11 @@ LenguageBtn.addEventListener("click", (e) => {
     };
 
     localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
-
     LenguageBtn.innerText = JSON.parse(localStorage.getItem("Lenguage")).TextBtn;
-
     SearchText.innerText = JSON.parse(localStorage.getItem("Lenguage")).SearchText;
 
-    for(i = 0; i < DataLenght; i++){ 
-      document.querySelectorAll('div.CharInf button')[i].textContent = 'Ver más'
-    }
-
     for(i = 0; i < DataLenght; i++){
+      document.querySelectorAll('div.CharInf button')[i].textContent = 'Ver más'
       switch(document.querySelectorAll('div.CharInf p')[i].textContent){
         case 'Male':
         document.querySelectorAll('div.CharInf p')[i].textContent = 'Masculino'
@@ -281,17 +303,29 @@ LenguageBtn.addEventListener("click", (e) => {
 
 
     for(i = 0; i < DataLenght; i++){
+      document.querySelectorAll('div.statusbox')[i].classList.add('notransition');
       switch(document.querySelectorAll('div.statusbox h1')[i].textContent){
         case 'Alive':
+        document.querySelectorAll('div.statusbox')[i].classList.remove('Alive')
+        document.querySelectorAll('div.statusbox')[i].classList.add('Alive_ESP')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'Con vida'
         break;
         case 'Dead':
+        document.querySelectorAll('div.statusbox')[i].classList.remove('Dead')
+        document.querySelectorAll('div.statusbox')[i].classList.add('Dead_ESP')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'Muerto'
         break;
         case 'unknown':
+        document.querySelectorAll('div.statusbox')[i].classList.remove('Unknown')
+        document.querySelectorAll('div.statusbox')[i].classList.add('Unknown_ESP')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'Desaparecido'
         break;
       }
+      setTimeout(() => {
+        for(i = 0; i < DataLenght; i++){
+        document.querySelectorAll('div.statusbox')[i].classList.remove('notransition');
+      }}, 50);
+     
     }
 
   } else {
@@ -302,30 +336,37 @@ LenguageBtn.addEventListener("click", (e) => {
     };
 
     localStorage.setItem("Lenguage", JSON.stringify(Lenguage));
-
     LenguageBtn.innerText = JSON.parse(localStorage.getItem("Lenguage")).TextBtn;
-
     SearchText.innerText = JSON.parse(localStorage.getItem("Lenguage")).SearchText;
-    
-    for(i = 0; i < DataLenght; i++){ 
-      document.querySelectorAll('div.CharInf button')[i].textContent = 'Show more'
-    }
 
     for(i = 0; i < DataLenght; i++){
+      document.querySelectorAll('div.CharInf button')[i].textContent = 'Show more'
+      document.querySelectorAll('div.statusbox')[i].classList.add('notransition');
       switch(document.querySelectorAll('div.statusbox h1')[i].textContent){
         case 'Con vida':
+        document.querySelectorAll('div.statusbox')[i].classList.remove('Alive_ESP')
+        document.querySelectorAll('div.statusbox')[i].classList.add('Alive')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'Alive'
         break;
         case 'Muerto':
+        document.querySelectorAll('div.statusbox')[i].classList.remove('Dead_ESP')
+        document.querySelectorAll('div.statusbox')[i].classList.add('Dead')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'Dead'
         break;
         case 'Desaparecido':
+          document.querySelectorAll('div.statusbox')[i].classList.remove('Unknown_ESP')
+          document.querySelectorAll('div.statusbox')[i].classList.add('Unknown')
         document.querySelectorAll('div.statusbox h1')[i].textContent = 'unknown'
         break;
       }
+      setTimeout(() => {
+        for(i = 0; i < DataLenght; i++){
+        document.querySelectorAll('div.statusbox')[i].classList.remove('notransition');
+      }}, 50);
     }
 
     for(i = 0; i < DataLenght; i++){
+      document.querySelectorAll('div.statusbox')[i].classList.add('notransition');
       switch(document.querySelectorAll('div.CharInf p')[i].textContent){
         case 'Masculino':
         document.querySelectorAll('div.CharInf p')[i].textContent = 'Male'
@@ -333,10 +374,11 @@ LenguageBtn.addEventListener("click", (e) => {
         case 'Femenino':
         document.querySelectorAll('div.CharInf p')[i].textContent = 'Female'
         break;
-        case 'Desaparecido':
+        case 'Desconocido':
         document.querySelectorAll('div.CharInf p')[i].textContent = 'unknown'
         break;
       }
+
     }
   }
 });
@@ -365,7 +407,7 @@ dataDiv.addEventListener("click", async (e) => {
 
 NextPageBtn.addEventListener("click", () => {
   PageCounter = PageCounter + 1;
-  ReturnPageBtn.style.visibility = "visible";
+  ReturnPageBtn.style.display = "inline";
   dataDiv.innerHTML = "";
   url = `https://rickandmortyapi.com/api/character?page=${PageCounter}`;
   return FetchData(url);
@@ -380,6 +422,14 @@ ReturnPageBtn.addEventListener("click", () => {
     return HideReturnBtn();
   }
 });
+
+const HideReturnBtn = () => {
+  if (PageCounter === 1) {
+    ReturnPageBtn.style.display = "none";
+  } else {
+    ReturnPageBtn.style.display = "inline";
+  }
+};
 
 HideReturnBtn();
 FetchData(url);
