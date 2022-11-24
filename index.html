@@ -13,6 +13,11 @@
     <script src="https://kit.fontawesome.com/a555f75e92.js" crossorigin="anonymous"></script>
   </head>
   <body>
+
+    <header>
+      <img  alt="Logo" src="imgs/PortalLogo.png">
+    </header>
+
     <div class="loader-div loading_off">
       <span class="loader">
         <img src="imgs/Portal.png" alt="Portal" />
@@ -21,7 +26,7 @@
     
     <div class="Header">
       <div class="inputbox">
-        <input type="text" id="SearchCharacter" required="required" title="Buscador"/>
+        <input type="text" id="SearchCharacter" required="required" title="Buscador" autocomplete="off"/>
         <span class="SearchText"></span>
         <i></i>
       </div>
@@ -32,7 +37,7 @@
 
     <div id="Datadiv"></div>
 
-    <div id="PaginationsButtons">
+    <div id="PaginationsButtons" class="footer">
       <button id="RetuPagBtn" class="StyledBtn"><i class="fa fa-arrow-left"></i></button>
       <button id="NextPagBtn" class="StyledBtn"><i class="fa fa-arrow-right"></i></button>
     </div>

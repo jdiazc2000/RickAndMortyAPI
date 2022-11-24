@@ -20,6 +20,60 @@ body{
   background-position: center center;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: linear-gradient(rgba(0, 0, 0, 0.686), rgba(0, 0, 0, 0.683))
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 135, 27, 0.5);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 149, 30, 0.5);
+}
+
+header{
+  width: 100%;
+  display: block;
+  height: 50vh;
+  text-align: center;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.686), rgba(0, 0, 0, 0.683)),
+  url("../imgs/BacgroundHeader.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+header img{
+  margin: 0 auto;
+  height: 100%;
+  animation: PortalReveal 1.5s ease-in-out;
+  -webkit-filter: drop-shadow(12px 12px 10px rgba(0, 135, 27, 0.5));
+}
+
+@keyframes PortalReveal{
+  0% {
+    opacity: 0%;
+    scale: 0%;
+  }
+
+  100%{
+    opacity: 100%;
+    scale: 100%;
+  }
+}
+
+
 .Header {
   display: flex;
   margin: 1rem 0px 1rem 0px;
@@ -83,6 +137,7 @@ body{
 }
 
 #Datadiv {
+  text-align: center;
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
@@ -260,6 +315,7 @@ body{
 
 .character-card .CharInf{
   color: white;
+  text-align: start;
   line-height: 2.5rem;
   width:  100%;
   position: absolute;
@@ -297,6 +353,7 @@ body{
 
 #PaginationsButtons {
   text-align: center;
+  padding: 1rem
 }
 
 .StyledBtn {
@@ -306,6 +363,7 @@ body{
   border-color: green;
   border-radius: 0.5rem;
   background-color: #293241;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
   color: white;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -339,5 +397,17 @@ body{
   }
   .character-card .CharInf h1{
    font-size: 1rem;
+  }
+}
+
+@media(max-width: 470px){
+  .Header{
+    display: block;
+    text-align: center;
+  }
+
+  .inputbox{
+    margin: 0 auto;
+    margin-bottom: 1rem;
   }
 }

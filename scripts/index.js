@@ -59,6 +59,8 @@ const FetchData = async (url) => {
   }else{
     LoadingDataText.innerText = `Loading...`
   }
+  PaginationsButtons.style.display = 'none'
+  HideReturnBtn()
 
   LoadingProgress.appendChild(LoadingProgress_Text)
   dataDiv.appendChild(LoadingProgress)
@@ -81,6 +83,7 @@ const FetchData = async (url) => {
       LenguageBtn.classList.remove("DisabledBtn");
       LenguageBtn.removeAttribute("disabled");
       LoadingProgress.remove()
+      PaginationsButtons.style.display = 'block'
       MostrarData(data.results);
     })
     .catch((err) => {
