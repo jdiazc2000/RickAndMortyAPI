@@ -211,19 +211,6 @@ const MostrarData = (ApiData) => {
         CharacterBtn.textContent = "Show more";
       }
 
-      const StatusColor = document.createElement("div");
-      switch (character.status) {
-        case "Alive":
-          StatusColor.classList.add("CharStatus_green");
-          break;
-        case "Dead":
-          StatusColor.classList.add("CharStatus_red");
-          break;
-        case "unknown":
-          StatusColor.classList.add("CharStatus_grey");
-          break;
-      }
-
       CharacterDiv.appendChild(CharacterImage);
       CharStatus.appendChild(StatusText)
       CharacterDiv.appendChild(CharStatus)
