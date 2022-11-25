@@ -418,7 +418,7 @@ header img{
   }
 }
 
-@media screen and (max-width: 696px){
+@media screen and (max-width: 710px){
   .Datadiv{
     flex-direction: none;
     flex-direction: unset;
