@@ -35,6 +35,7 @@ const Translations_Gender = {
 
 const FetchData = async (url) => {
   const LoadingDataDiv = document.createElement("div");
+  LoadingDataDiv.classList.add('LoadingDiv')
   const LoadingDataText = document.createElement("h1");
   const LoadingProgress = document.createElement('div')
   const LoadingProgress_Text = document.createElement('h1')
@@ -55,8 +56,7 @@ const FetchData = async (url) => {
   }else{
     LoadingDataText.innerText = `Loading...`
   }
-  
-  LoadingDataDiv.style.margin = '0 auto'
+
   PaginationsButtons.style.display = 'none'
 
   LoadingProgress.appendChild(LoadingProgress_Text)

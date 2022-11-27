@@ -64,7 +64,7 @@ if (CharacterSelected != null) {
       CharSpecie = Translations_Specie.Human;
       break;
     case "Alien":
-      CharSpecie = Translations_Specie.Alive;
+      CharSpecie = Translations_Specie.Alien;
       break;
     case "unknown":
       CharSpecie = Translations_Specie.unknown;
